@@ -5,7 +5,9 @@
     ],
     "jsRules": {},
     "rules": {
-        "trailing-comma": [ false ]
+        "indent": [ "error", "tabs" ],
+        "trailing-comma": [ false ],
+        "no-trailing-whitespace": [true, "ignore-comments"]
     },
     "rulesDirectory": []
 }
