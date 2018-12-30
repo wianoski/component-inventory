@@ -5,7 +5,8 @@ export const register = (app: express.Application) => {
 
     // define router handler for default home landing
     app.get("/", (req: any, res) => {
-        res.render("index");
+        const user = req.userContext ? req.userContext.userinfo : null;
+        res.render("index", { isAuthenticated: req.isAuthenticated(), user });
     });
 
     // define secure router handle for login page that redirects to /components
@@ -20,7 +21,8 @@ export const register = (app: express.Application) => {
     });
 
     // define secure router handle for page
-    app.get("/components", oidc.ensureAuthenticated(), ( req, res ) => {
-        res.render("components");
+    app.get("/components", oidc.ensureAuthenticated(), ( req: any, res ) => {
+        const user = req.userContext ? req.userContext.userinfo : null;
+        res.render("components", { isAuthenticated: req.isAuthenticated(), user });
     });
 };

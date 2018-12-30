@@ -4,7 +4,8 @@ exports.register = (app) => {
     const oidc = app.locals.oidc;
     // define router handler for default home landing
     app.get("/", (req, res) => {
-        res.render("index");
+        const user = req.userContext ? req.userContext.userinfo : null;
+        res.render("index", { isAuthenticated: req.isAuthenticated(), user });
     });
     // define secure router handle for login page that redirects to /components
     app.get("/login", oidc.ensureAuthenticated(), (req, res) => {
@@ -17,7 +18,8 @@ exports.register = (app) => {
     });
     // define secure router handle for page
     app.get("/components", oidc.ensureAuthenticated(), (req, res) => {
-        res.render("components");
+        const user = req.userContext ? req.userContext.userinfo : null;
+        res.render("components", { isAuthenticated: req.isAuthenticated(), user });
     });
 };
 //# sourceMappingURL=index.js.map
