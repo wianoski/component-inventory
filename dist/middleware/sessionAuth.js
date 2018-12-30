@@ -8,11 +8,10 @@ const oidc_middleware_1 = require("@okta/oidc-middleware");
 const express_session_1 = __importDefault(require("express-session"));
 exports.register = (app) => {
     const oidc = new oidc_middleware_1.ExpressOIDC({
-        issuer: "https://dev-288700.oktapreview.com/oauth/default",
-        // tslint:disable-next-line:object-literal-sort-keys
-        client_id: "0oainiwuhwCe8KzSl0h7",
-        client_secret: "5Sp2gki7OPh2MIGwYHmb1YW_t8UWjhk7ghsiy1jX",
-        redirect_uri: "http://localhost:8080/authorization-code/callback",
+        client_id: process.env.OKTA_CLIENT_ID,
+        client_secret: process.env.OKTA_CLIENT_SECRET,
+        issuer: `${process.env.OKTA_ORG_URL}/oauth2/default`,
+        redirect_uri: `${process.env.HOST_URL}/authorization-code/callback`,
         scope: "openid profile"
     });
     // Configure Express to use auth sessions

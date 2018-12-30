@@ -4,12 +4,11 @@ import session from "express-session";
 
 export const register = ( app: any ) => {
 	const oidc = new ExpressOIDC({
-		issuer: "https://dev-288700.oktapreview.com/oauth/default",
-		// tslint:disable-next-line:object-literal-sort-keys
-		client_id: "0oainiwuhwCe8KzSl0h7",
-		client_secret: "5Sp2gki7OPh2MIGwYHmb1YW_t8UWjhk7ghsiy1jX",
-		redirect_uri: "http://localhost:8080/authorization-code/callback",
-		scope: "openid profile"
+		client_id: process.env.OKTA_CLIENT_ID,
+        client_secret: process.env.OKTA_CLIENT_SECRET,
+        issuer: `${ process.env.OKTA_ORG_URL }/oauth2/default`,
+        redirect_uri: `${ process.env.HOST_URL }/authorization-code/callback`,
+        scope: "openid profile"
 	});
 
 	// Configure Express to use auth sessions
